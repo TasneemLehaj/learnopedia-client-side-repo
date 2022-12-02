@@ -14,6 +14,7 @@ const CourseDetailsCard = () => {
 
     return (
         <div>
+            <h2 className='text-warning text-center mt-2'> Welcome to the Course!</h2>
             <Card className='mt-3'>
                 <Card.Img variant="top" src={img} />
                 <Card.Body>
@@ -30,8 +31,8 @@ const CourseDetailsCard = () => {
                         <FaStar></FaStar>
                         <FaStar></FaStar>
                     </div>
-                    <Link to={``}>
-                        <Button variant="primary">See Details</Button>
+                    <Link to='/login'>
+                        <Button variant="primary">Get Premium Access</Button>
                     </Link>
                 </Card.Body>
             </Card>
