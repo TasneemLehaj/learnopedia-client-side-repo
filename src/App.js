@@ -7,6 +7,9 @@ import Home from './components/Home/Home';
 import Login from './components/Login/Login';
 import Register from './components/Register/Register';
 import Errorpage from './components/Errorpage/Errorpage';
+import Courses from './components/Courses/Courses';
+import Blog from './components/Blog/Blog';
+import CourseDetailsCard from './components/CourseDetailsCard/CourseDetailsCard';
 
 function App() {
 
@@ -20,6 +23,25 @@ function App() {
         {
           path: '/',
           element: <Home></Home>
+        },
+        {
+          path: '/courses',
+          element: <Courses></Courses>,
+          loader: () => {
+            return fetch('http://localhost:5000/courses')
+          }
+        },
+        {
+          path: '/details/:id',
+          element: <CourseDetailsCard></CourseDetailsCard>,
+          loader: ({ params }) => {
+            return fetch(`http://localhost:5000/details/${params.id}`)
+          }
+        },
+
+        {
+          path: '/blog',
+          element: <Blog></Blog>
         },
         {
           path: '/login',
@@ -38,7 +60,7 @@ function App() {
   ])
 
   return (
-    <div className="App">
+    <div >
       <RouterProvider router={router}></RouterProvider>
     </div>
   );
