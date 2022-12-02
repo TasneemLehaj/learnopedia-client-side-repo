@@ -1,12 +1,22 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import Button from 'react-bootstrap/Button';
 import { Image } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../Contexts/AuthProvider';
+import { useContext } from 'react';
 
 const Header = () => {
+
+    const { user, logOut } = useContext(AuthContext);
+
+    const handleLogOut = () => {
+        logOut()
+            .then(() => { })
+            .catch(error => console.error(error))
+    }
     return (
         <div >
             <Navbar collapseOnSelect expand="lg" bg="light" variant="light">
@@ -24,13 +34,26 @@ const Header = () => {
                             <Nav.Link href="/courses"> Courses</Nav.Link>
                             <Nav.Link href="/blog">Blog</Nav.Link>
                             <Nav.Link href="*">FAQ</Nav.Link>
-                            <Button variant="outline-dark">Light Mode</Button>{' '}
+                            <Button variant="outline-dark">Dark Mode</Button>{' '}
                         </Nav>
                         <Nav>
                             <Nav.Link href="#deets">More deets</Nav.Link>
                             <Nav.Link eventKey={2} href="#memes">
-                                Dank memes
+                                {
+                                    user?.uid ?
+                                        <>
+                                            <span>{user.displayName} </span>
+                                            <Button onClick={handleLogOut} variant="outline-dark">Logout</Button>{' '}
+                                        </>
+                                        :
+                                        <>
+                                            <Button variant="outline-dark">Login
+                                            </Button>{' '}
+                                            <Button variant="outline-dark">Register</Button>{' '}
+                                        </>
+                                }
                             </Nav.Link>
+
                         </Nav>
                     </Navbar.Collapse>
                 </Container>
