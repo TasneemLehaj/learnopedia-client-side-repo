@@ -1,4 +1,5 @@
-import React, { useContext } from 'react';
+import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
+import React, { useContext, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { Link } from 'react-router-dom';
@@ -6,7 +7,10 @@ import { AuthContext } from '../Contexts/AuthProvider';
 
 const Login = () => {
 
-    const { signIn } = useContext(AuthContext);
+    const { signIn, providerLogin } = useContext(AuthContext);
+    const [error, setError] = useState('')
+
+    const googleProvider = new GoogleAuthProvider();
 
     const handleLogin = (event) => {
         event.preventDefault();
@@ -15,12 +19,24 @@ const Login = () => {
         const password = form.password.value;
         console.log(email, password);
         form.reset();
+        setError('');
         signIn(email, password)
             .then((result => {
                 const user = result.user;
                 console.log(user)
             }))
-            .catch(error => console.error(error))
+            .catch(error => {
+                console.log(error);
+                setError(error.message);
+            })
+    }
+
+    const handleGoogleSignIn = () => {
+        providerLogin(googleProvider)
+            .then(result => {
+                const user = result.user;
+            })
+            .catch(error => console.log(error))
     }
 
     return (
@@ -43,10 +59,10 @@ const Login = () => {
 
                 <p> New to the account? Go to <Link to='/register'>Register</Link></p>
                 <Form.Text className="text-danger me-4">
-                    { }
+                    {error}
                 </Form.Text>
                 <hr />
-                <Button variant="outline-primary"> Login with Google</Button>{' '}
+                <Button onClick={handleGoogleSignIn} variant="outline-primary"> Login with Google</Button>{' '}
                 <Button variant="outline-success"> Login with Github</Button>{' '}
 
             </Form>

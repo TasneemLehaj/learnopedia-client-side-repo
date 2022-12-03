@@ -7,6 +7,7 @@ import { Image } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../Contexts/AuthProvider';
 import { useContext } from 'react';
+import { FaUserAlt } from 'react-icons/fa';
 
 const Header = () => {
 
@@ -37,7 +38,15 @@ const Header = () => {
                             <Button variant="outline-dark">Dark Mode</Button>{' '}
                         </Nav>
                         <Nav>
-                            <Nav.Link href="#deets">More deets</Nav.Link>
+                            <Nav.Link href="#deets">
+                                {
+                                    user?.photoURL ?
+                                        <Image style={{ height: '30px' }}
+                                            rounded src={user?.photoURL}>
+                                        </Image>
+                                        : <FaUserAlt></FaUserAlt>}
+
+                            </Nav.Link>
                             <Nav.Link eventKey={2} href="#memes">
                                 {
                                     user?.uid ?
@@ -47,9 +56,9 @@ const Header = () => {
                                         </>
                                         :
                                         <>
-                                            <Button variant="outline-dark">Login
-                                            </Button>{' '}
-                                            <Button variant="outline-dark">Register</Button>{' '}
+                                            <Link to='/login'><Button variant="outline-dark">Login
+                                            </Button>{' '}</Link>
+                                            <Link to='/register'><Button variant="outline-dark">Register</Button>{' '}</Link>
                                         </>
                                 }
                             </Nav.Link>
@@ -58,7 +67,7 @@ const Header = () => {
                     </Navbar.Collapse>
                 </Container>
             </Navbar>
-        </div>
+        </div >
     );
 };
 
