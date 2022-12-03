@@ -1,10 +1,13 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { FaStar } from 'react-icons/fa';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import { Link, useLoaderData } from 'react-router-dom';
+import { AuthContext } from '../Contexts/AuthProvider';
 
 const CourseDetailsCard = () => {
+
+    const { user } = useContext(AuthContext);
 
     const selectedCourse = useLoaderData();
     console.log(selectedCourse);
@@ -31,9 +34,22 @@ const CourseDetailsCard = () => {
                         <FaStar></FaStar>
                         <FaStar></FaStar>
                     </div>
+                    {/* {
+                        user ? <>
+                            <Link to={`/checkout/${selectedCourse.id}`}>
+                                <Button variant="primary">Get Premium Access</Button>
+                            </Link>
+
+                        </>
+                            :
+                            <>
+                                <Link to='/login'> <Button variant="primary">Get Premium Access</Button></Link>
+                            </>
+                    } */}
                     <Link to={`/checkout/${selectedCourse.id}`}>
                         <Button variant="primary">Get Premium Access</Button>
                     </Link>
+
                 </Card.Body>
             </Card>
         </div>

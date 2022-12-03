@@ -12,7 +12,7 @@ import { FaUserAlt } from 'react-icons/fa';
 const Header = () => {
 
     const { user, logOut } = useContext(AuthContext);
-
+    // console.log(user);
     const handleLogOut = () => {
         logOut()
             .then(() => { })
@@ -38,7 +38,7 @@ const Header = () => {
                             <Button variant="outline-dark">Dark Mode</Button>{' '}
                         </Nav>
                         <Nav>
-                            <Nav.Link href="#deets">
+                            <Nav.Link href="">
                                 {
                                     user?.photoURL ?
                                         <Image style={{ height: '30px' }}
@@ -47,7 +47,7 @@ const Header = () => {
                                         : <FaUserAlt></FaUserAlt>}
 
                             </Nav.Link>
-                            <Nav.Link eventKey={2} href="#memes">
+                            <Nav.Link eventKey={2} href="">
                                 {
                                     user?.uid ?
                                         <>

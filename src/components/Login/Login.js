@@ -2,7 +2,7 @@ import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import React, { useContext, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../Contexts/AuthProvider';
 
 const Login = () => {
@@ -12,6 +12,11 @@ const Login = () => {
 
     const googleProvider = new GoogleAuthProvider();
 
+    const navigate = useNavigate();
+    const location = useLocation();
+
+    const from = location.state?.from?.pathname || '/'
+
     const handleLogin = (event) => {
         event.preventDefault();
         const form = event.target;
@@ -20,6 +25,7 @@ const Login = () => {
         console.log(email, password);
         form.reset();
         setError('');
+        navigate(from, { replace: true })
         signIn(email, password)
             .then((result => {
                 const user = result.user;

@@ -11,6 +11,7 @@ import Courses from './components/Courses/Courses';
 import Blog from './components/Blog/Blog';
 import CourseDetailsCard from './components/CourseDetailsCard/CourseDetailsCard';
 import Checkout from './components/Checkout/Checkout';
+import PrivateRoute from './components/PrivateRoute/PrivateRoute';
 
 function App() {
 
@@ -54,7 +55,7 @@ function App() {
         },
         {
           path: '/checkout/:id',
-          element: <Checkout></Checkout>
+          element: <PrivateRoute><Checkout></Checkout></PrivateRoute>
         }
       ]
 

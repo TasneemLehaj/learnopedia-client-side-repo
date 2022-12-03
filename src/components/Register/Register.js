@@ -1,4 +1,4 @@
-import { createUserWithEmailAndPassword, GoogleAuthProvider } from 'firebase/auth';
+import { GithubAuthProvider, GoogleAuthProvider } from 'firebase/auth';
 import React, { useContext, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
@@ -8,10 +8,11 @@ import { AuthContext } from '../Contexts/AuthProvider';
 
 const Register = () => {
 
-    const { createUser, providerLogin } = useContext(AuthContext);
+    const { createUser, providerLogin, githubProviderLogin, updateUserProfile } = useContext(AuthContext);
     const [error, setError] = useState('');
 
     const googleProvider = new GoogleAuthProvider();
+    const githubProvider = new GithubAuthProvider();
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -21,18 +22,26 @@ const Register = () => {
         const email = form.email.value;
         const password = form.password.value;
         console.log(name, photoURL, email, password);
-        form.reset();
+
         setError('');
         createUser(email, password)
             .then((result => {
                 const user = result.user;
-                console.log(user)
+                console.log(user);
+                updateUserProfile(name, photoURL)
+                    .then(result => {
+
+                    })
+                    .catch(error => {
+                        console.error(error);
+                        setError(error.message);
+                    })
             }))
             .catch(error => {
                 console.error(error);
                 setError(error.message);
             })
-
+        form.reset();
     }
 
     const handleGoogleSignIn = () => {
@@ -43,6 +52,26 @@ const Register = () => {
             .catch(error => console.log(error))
     }
 
+    const handleGitHubSignIn = () => {
+        githubProviderLogin(githubProvider)
+            .then(result => {
+                const user = result.user;
+                console.log(user)
+            })
+            .catch(error => console.error(error))
+
+    }
+
+
+    // const handleUpdateUserProfile = (name, photoURL) => {
+    //     const profile = {
+    //         displayName: name,
+    //         photoURL: photoURL
+    //     }
+    //     return updateUserProfile(profile)
+    //         .then(() => { })
+    //         .catch(error => console.error(error))
+    // }
 
 
     return (
@@ -79,7 +108,7 @@ const Register = () => {
                 </Form.Text>
                 <hr />
                 <Button onClick={handleGoogleSignIn} variant="outline-primary"> Login with Google</Button>{' '}
-                <Button variant="outline-success"> Login with Github</Button>{' '}
+                <Button onClick={handleGitHubSignIn} variant="outline-success"> Login with Github</Button>{' '}
 
             </Form>
 
