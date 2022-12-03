@@ -1,4 +1,4 @@
-import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { createUserWithEmailAndPassword, GoogleAuthProvider } from 'firebase/auth';
 import React, { useContext, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
@@ -8,8 +8,10 @@ import { AuthContext } from '../Contexts/AuthProvider';
 
 const Register = () => {
 
-    const { createUser } = useContext(AuthContext);
+    const { createUser, providerLogin } = useContext(AuthContext);
     const [error, setError] = useState('');
+
+    const googleProvider = new GoogleAuthProvider();
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -32,6 +34,15 @@ const Register = () => {
             })
 
     }
+
+    const handleGoogleSignIn = () => {
+        providerLogin(googleProvider)
+            .then(result => {
+                const user = result.user;
+            })
+            .catch(error => console.log(error))
+    }
+
 
 
     return (
@@ -67,7 +78,7 @@ const Register = () => {
                     {error}
                 </Form.Text>
                 <hr />
-                <Button variant="outline-primary"> Login with Google</Button>{' '}
+                <Button onClick={handleGoogleSignIn} variant="outline-primary"> Login with Google</Button>{' '}
                 <Button variant="outline-success"> Login with Github</Button>{' '}
 
             </Form>

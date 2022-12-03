@@ -31,7 +31,7 @@ const CourseDetailsCard = () => {
                         <FaStar></FaStar>
                         <FaStar></FaStar>
                     </div>
-                    <Link to='/login'>
+                    <Link to={`/checkout/${selectedCourse.id}`}>
                         <Button variant="primary">Get Premium Access</Button>
                     </Link>
                 </Card.Body>

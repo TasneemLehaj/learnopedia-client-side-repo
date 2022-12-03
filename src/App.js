@@ -10,6 +10,7 @@ import Errorpage from './components/Errorpage/Errorpage';
 import Courses from './components/Courses/Courses';
 import Blog from './components/Blog/Blog';
 import CourseDetailsCard from './components/CourseDetailsCard/CourseDetailsCard';
+import Checkout from './components/Checkout/Checkout';
 
 function App() {
 
@@ -50,13 +51,15 @@ function App() {
         {
           path: '/register',
           element: <Register></Register>
+        },
+        {
+          path: '/checkout/:id',
+          element: <Checkout></Checkout>
         }
       ]
 
     },
-    {
 
-    }
   ])
 
   return (
