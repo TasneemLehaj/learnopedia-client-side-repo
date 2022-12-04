@@ -30,14 +30,14 @@ function App() {
           path: '/courses',
           element: <Courses></Courses>,
           loader: () => {
-            return fetch('http://localhost:5000/courses')
+            return fetch('https://learnopedia-server.vercel.app/courses')
           }
         },
         {
           path: '/details/:id',
           element: <CourseDetailsCard></CourseDetailsCard>,
           loader: ({ params }) => {
-            return fetch(`http://localhost:5000/details/${params.id}`)
+            return fetch(`https://learnopedia-server.vercel.app/details/${params.id}`)
           }
         },
 

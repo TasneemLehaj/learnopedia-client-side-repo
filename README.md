@@ -1,6 +1,6 @@
 # About my project
 Project Name : LEARNOPEDIA
-Live Website Link :
+Live Website Link : "https://learnopedia-d1132.web.app/"
   This is a programming language learning course enrollment based website where an individual can choose from different courses and enroll to those courses  according to their choices.
 
 ##
@@ -13,7 +13,7 @@ Separate route to see all the COURSES along with e sidenav where all course name
 Individual course details ar provided with print pdf button
 
 #####
-Premium access is given to the logged in users to purchase the course.Without login the selected course could not be purchased. User must login thorugh any of the authentication process selected for the website from Firebase as it is a private route.
+Premium access is given to the logged in users to purchase the course.Without login the selected course could not be purchased. User must login thorugh any of the authenticatin process selected for the website from Firebase as it is a private route.
 
 ######
 Authentication is used from firebase authentication using  email and password 
