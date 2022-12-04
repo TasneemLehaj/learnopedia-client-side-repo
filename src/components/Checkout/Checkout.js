@@ -16,7 +16,7 @@ const Checkout = () => {
                             <Card.Text className='text-success'>
                                 You have successfully purchased the course.Please see the details information available on our website.
                             </Card.Text>
-                            <Link to='/courses'> <Button variant="primary">Go To Courses</Button></Link>
+                            <Link to='/courses'> <Button variant="success">Go To Courses</Button></Link>
                         </Card.Body>
                     </Card>
                 </Col>

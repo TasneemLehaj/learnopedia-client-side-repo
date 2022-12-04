@@ -26,7 +26,7 @@ const CourseDetailsCard = () => {
     return (
         <div ref={componentRef}>
             <h2 className='text-warning text-center mt-2'> Welcome to the Course!</h2>
-            <Button onClick={handlePrint} className='btn btn-success mx-auto'>Download pdf</Button>
+            <Button onClick={handlePrint} className='btn btn-success d-flex mx-auto'>Print pdf</Button>
             <Card className='mt-3'>
                 <Card.Img variant="top" src={img} />
                 <Card.Body>
@@ -59,7 +59,6 @@ const CourseDetailsCard = () => {
                     <Link to={`/checkout/${selectedCourse.id}`}>
                         <Button variant="primary">Get Premium Access</Button>
                     </Link>
-                    <Button onClick={handlePrint} className='btn btn-primary'>Download pdf</Button>
 
                 </Card.Body>
             </Card>
