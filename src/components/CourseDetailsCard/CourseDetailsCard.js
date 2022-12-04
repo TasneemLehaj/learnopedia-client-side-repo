@@ -1,9 +1,13 @@
-import React, { useContext } from 'react';
+import React, { useContext, useRef } from 'react';
 import { FaStar } from 'react-icons/fa';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import { Link, useLoaderData } from 'react-router-dom';
 import { AuthContext } from '../Contexts/AuthProvider';
+import { useReactToPrint } from 'react-to-print';
+
+// import { ComponentToPrint } from './ComponentToPrint';
+
 
 const CourseDetailsCard = () => {
 
@@ -14,10 +18,15 @@ const CourseDetailsCard = () => {
 
     const { id, name, details, reviews, img } = selectedCourse;
 
+    const componentRef = useRef();
+    const handlePrint = useReactToPrint({
+        content: () => componentRef.current,
+    });
 
     return (
-        <div>
+        <div ref={componentRef}>
             <h2 className='text-warning text-center mt-2'> Welcome to the Course!</h2>
+            <Button onClick={handlePrint} className='btn btn-success mx-auto'>Download pdf</Button>
             <Card className='mt-3'>
                 <Card.Img variant="top" src={img} />
                 <Card.Body>
@@ -35,7 +44,8 @@ const CourseDetailsCard = () => {
                         <FaStar></FaStar>
                     </div>
                     {/* {
-                        user ? <>
+                        user ? 
+                        <>
                             <Link to={`/checkout/${selectedCourse.id}`}>
                                 <Button variant="primary">Get Premium Access</Button>
                             </Link>
@@ -49,6 +59,7 @@ const CourseDetailsCard = () => {
                     <Link to={`/checkout/${selectedCourse.id}`}>
                         <Button variant="primary">Get Premium Access</Button>
                     </Link>
+                    <Button onClick={handlePrint} className='btn btn-primary'>Download pdf</Button>
 
                 </Card.Body>
             </Card>

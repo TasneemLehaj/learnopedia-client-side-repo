@@ -12,7 +12,7 @@ const Register = () => {
     const [error, setError] = useState('');
 
     const googleProvider = new GoogleAuthProvider();
-    const githubProvider = new GithubAuthProvider();
+
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -53,7 +53,7 @@ const Register = () => {
     }
 
     const handleGitHubSignIn = () => {
-        githubProviderLogin(githubProvider)
+        githubProviderLogin()
             .then(result => {
                 const user = result.user;
                 console.log(user)
@@ -63,26 +63,15 @@ const Register = () => {
     }
 
 
-    // const handleUpdateUserProfile = (name, photoURL) => {
-    //     const profile = {
-    //         displayName: name,
-    //         photoURL: photoURL
-    //     }
-    //     return updateUserProfile(profile)
-    //         .then(() => { })
-    //         .catch(error => console.error(error))
-    // }
-
-
     return (
         <div className="square border border-success rounded p-2 m-5">
             <Form onSubmit={handleSubmit} >
-                <Form.Group className="mb-3" controlId="formBasicEmail">
+                <Form.Group className="mb-3" controlId="formBasicName">
                     <Form.Label>Full Name</Form.Label>
                     <Form.Control name='name' type="text" placeholder="Enter name" />
 
                 </Form.Group>
-                <Form.Group className="mb-3" controlId="formBasicEmail">
+                <Form.Group className="mb-3" controlId="formBasicPhotoURL">
                     <Form.Label>Photo URL</Form.Label>
                     <Form.Control name='photoURL' type="text" placeholder="Photo URL" />
 

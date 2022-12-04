@@ -28,13 +28,13 @@ const Header = () => {
                     ></Image>
 
 
-                    <Navbar.Brand href="/">Learnopedia</Navbar.Brand>
+                    <Navbar.Brand> <Link to='/'>Learnopedia</Link></Navbar.Brand>
                     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                     <Navbar.Collapse id="responsive-navbar-nav">
                         <Nav className="me-auto">
-                            <Nav.Link href="/courses"> Courses</Nav.Link>
-                            <Nav.Link href="/blog">Blog</Nav.Link>
-                            <Nav.Link href="*">FAQ</Nav.Link>
+                            <Link className='me-2 btn btn-success' to="/courses"> Courses</Link>
+                            <Link to="/blog">Blog</Link>
+                            <Link to="*">FAQ</Link>
                             <Button variant="outline-dark">Dark Mode</Button>{' '}
                         </Nav>
                         <Nav>

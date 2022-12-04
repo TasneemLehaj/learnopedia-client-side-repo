@@ -1,4 +1,4 @@
-import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
+import { GithubAuthProvider, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import React, { useContext, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
@@ -7,10 +7,11 @@ import { AuthContext } from '../Contexts/AuthProvider';
 
 const Login = () => {
 
-    const { signIn, providerLogin } = useContext(AuthContext);
+    const { signIn, providerLogin, githubProviderLogin } = useContext(AuthContext);
     const [error, setError] = useState('')
 
     const googleProvider = new GoogleAuthProvider();
+    const githubProvider = new GithubAuthProvider();
 
     const navigate = useNavigate();
     const location = useLocation();
@@ -45,6 +46,16 @@ const Login = () => {
             .catch(error => console.log(error))
     }
 
+    const handleGitHubSignIn = () => {
+        githubProviderLogin(githubProvider)
+            .then(result => {
+                const user = result.user;
+                console.log(user)
+            })
+            .catch(error => console.error(error))
+
+    }
+
     return (
         <div className="square border border-success rounded p-2 m-5">
             <Form onSubmit={handleLogin} >
@@ -69,7 +80,7 @@ const Login = () => {
                 </Form.Text>
                 <hr />
                 <Button onClick={handleGoogleSignIn} variant="outline-primary"> Login with Google</Button>{' '}
-                <Button variant="outline-success"> Login with Github</Button>{' '}
+                <Button onClick={handleGitHubSignIn} variant="outline-success"> Login with Github</Button>{' '}
 
             </Form>
         </div>
